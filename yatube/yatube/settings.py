@@ -2,15 +2,11 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
 SECRET_KEY = '9v$u1c4s^%nvt$a#4)bzz#%owxjuw)1jo=pyv9bi_pclbljtus'
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,15 +48,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'yatube.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -79,7 +72,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
@@ -91,10 +83,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 COUNT_POST = 10
-
