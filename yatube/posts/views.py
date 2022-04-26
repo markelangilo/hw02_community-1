@@ -2,12 +2,11 @@ from .models import Post, Group
 
 from django.shortcuts import get_object_or_404, render
 
-from django.conf import settings 
+from django.conf import settings
 
 
 def index(request):
     posts = Post.objects.all()[:settings.COUNT_POST]
-    title = "Это главная страница проекта Yatube"
     context = {
         'posts': posts,
     }
