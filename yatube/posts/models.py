@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-
 from django.db import models
 
 User = get_user_model()
@@ -8,7 +7,7 @@ User = get_user_model()
 class Group(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-    description = models.TextField(verbose_name='Текст поста')
+    description = models.TextField()
 
     def __str__(self):
         return self.title
@@ -31,7 +30,7 @@ class Post(models.Model):
     )
 
     class Meta:
-        ordering = ['-pub_date']
+        ordering = ('-pub_date'),
         verbose_name_plural = 'Посты'
 
     def __str__(self):
