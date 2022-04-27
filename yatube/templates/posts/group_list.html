@@ -3,9 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>{{ group.title }}</h1>
-        <p>
-            {{ group.description|linebreaks }}
-        </p>
+        <p>{{ group.description|linebreaks }}</p>
         {% for post in posts %}
             <article>
                 <ul>
@@ -17,6 +15,5 @@
                 </p>
             </article>
                 {% if not forloop.last %}<hr>{% endif %}
-            {% endfor %}
-            <div
-            {% endblock %}
+        {% endfor %}
+{% endblock %}
