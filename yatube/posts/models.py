@@ -8,7 +8,9 @@ class Group(models.Model):
     title = models.CharField("Название", max_length=200)
     slug = models.SlugField("Название группы", unique=True)
     description = models.TextField("Описание")
-    verbose_name_plural = 'Посты'
+
+    class Meta:
+        verbose_name_plural = 'Группы'
 
     def __str__(self):
         return self.title
