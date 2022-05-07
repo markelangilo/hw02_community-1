@@ -1,6 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404, render, redirect
 
+from .forms import PostForm
 from .models import Group, Post, User
 
 
@@ -50,3 +52,46 @@ def post_detail(request, post_id):
                'post': post,
                'posts_count': posts_count}
     return render(request, 'posts/post_detail.html', context)
+
+
+@login_required
+def post_create(request):
+    select_group = Group.objects.all()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('posts:profile', post.author.username)
+    else:
+        form = PostForm()
+    context = {
+        'form': form,
+        'title': 'Новая запись',
+        'select_group': select_group
+    }
+    return render(request, 'posts/create_post.html', context)
+
+
+def post_edit(request, post_id):
+    is_edit = True
+    post = get_object_or_404(Post, pk=post_id)
+    select_group = Group.objects.all()
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('posts:profile', post.author.username,)
+    else:
+        form = PostForm()
+    context = {
+        'form': form,
+        'title': 'Новая запись',
+        'is_edit': is_edit,
+        'post': post,
+        'select_group': select_group
+    }
+    return render(request, 'posts/create_post.html', context,)
